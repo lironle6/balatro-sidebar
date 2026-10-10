@@ -5,8 +5,10 @@ Keep track of your remaining deck and poker-hand stats without opening a menu.
 The sidebar shows:
 
 - Remaining cards by rank and suit, with bars to compare counts.
-- Enhancements, editions, and seals.
+- Enhancements, editions, and seals, including ones added by other mods.
 - Each poker hand's level, chips, mult, and times played.
+
+Press <kbd>`</kbd> to hide or show the sidebar.
 
 Suit icons use the game's high-contrast colours when that setting is enabled.
 
