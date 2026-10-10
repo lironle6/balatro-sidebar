@@ -7,7 +7,7 @@
   "description": "Persistent remaining-deck distribution and poker-hand stats during a run.",
   "prefix": "bsb",
   "main_file": "sidebar.lua",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "dependencies": [
     "Steamodded (>=1.~)"
   ]
