@@ -4,7 +4,7 @@ local special_kinds = {{pool = 'Enhanced', set = 'Enhanced', strip = ' Card$'},
     {pool = 'Edition', set = 'Edition'}, {pool = 'Seal', set = 'Other', suffix = '_seal'}}
 local PANEL_WIDTH = 2.6
 local LAYOUT_WIDTH = 260
-local PANEL_GAP = 4
+local PANEL_GAP = 8
 local REFRESH_INTERVAL = 0.4
 local TOGGLE_KEY = '`'
 local BODY, HEADING, SMALL = 18, 22, 16
@@ -308,15 +308,25 @@ function Game:draw(...)
     collecting = false
     if not show then return end
     local _, top, unit = placement(cache_height)
-    local room = G.ROOM_ORIG or G.ROOM.T
-    local x = math.floor((room.x + G.TILE_W - 0.08) * unit - cache:getWidth())
-    local y = math.floor((room.y + top + 0.3) * unit)
+    local room = G.ROOM.T
+    local x = math.floor((G.TILE_W - 0.08) * unit - cache:getWidth())
+    local y = math.floor((top + 0.25) * unit) - 7
     lg.push('all')
     lg.origin()
     lg.setShader()
+    lg.setScissor()
+    lg.setStencilTest()
     lg.setColor(G.C.WHITE)
+    -- Match Node:translate_container so the panel follows the board's drift.
+    lg.translate(room.w * unit * 0.5, room.h * unit * 0.5)
+    lg.rotate(room.r)
+    lg.translate((room.x - room.w * 0.5) * unit, (room.y - room.h * 0.5) * unit)
     lg.draw(cache, x, y)
-    lg.setScissor(x, y, cache:getWidth(), cache:getHeight())
+    lg.stencil(function()
+        lg.rectangle('fill', x, y, cache:getWidth(), cache:getHeight())
+    end, 'replace', 1)
+    lg.setStencilTest('equal', 1)
+    lg.origin()
     lg.setBlendMode('alpha', 'premultiplied')
     lg.draw(foreground, 0, 0, 0, 1 / G.CANV_SCALE, 1 / G.CANV_SCALE)
     lg.pop()
