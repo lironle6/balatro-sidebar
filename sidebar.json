@@ -1,0 +1,14 @@
+{
+  "id": "balatro_sidebar",
+  "name": "Balatro Sidebar",
+  "author": [
+    "Liron"
+  ],
+  "description": "Persistent remaining-deck distribution and poker-hand stats during a run.",
+  "prefix": "bsb",
+  "main_file": "sidebar.lua",
+  "version": "0.1.0",
+  "dependencies": [
+    "Steamodded (>=1.~)"
+  ]
+}
